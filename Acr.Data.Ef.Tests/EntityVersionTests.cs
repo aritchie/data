@@ -1,15 +1,16 @@
 ﻿using System;
+using Acr.Data.Ef.Modules;
 using Acr.Data.Ef.Tests.Models;
 using NUnit.Framework;
 
 
 namespace Acr.Data.Ef.Tests {
-    
+
     [TestFixture]
     public class EntityVersionTests : AbstractModuleTestFixture {
 
-        protected override void SetupModules(TestEfDependencyResolver resolver) {
-            resolver.Modules.Add(new EntityVersionModule());
+        protected override void SetupModules() {
+            TestDbContext.Modules.Add(new EntityVersionModule());
         }
 
 
@@ -75,7 +76,7 @@ namespace Acr.Data.Ef.Tests {
                 context.SaveChanges();
 
                 Assert.AreEqual(2, person.Version, "Version was not updated");
-            }          
+            }
         }
     }
 }

@@ -12,6 +12,13 @@ namespace Acr.Data.Ef {
 
         public static List<IDbContextModule> Modules { get; } = new List<IDbContextModule>();
 
+
+        public AcrDbContext() { }
+        public AcrDbContext(DbCompiledModel model) : base(model) { }
+        public AcrDbContext(string connectionStringOrName) : base(connectionStringOrName) { }
+        public AcrDbContext(string connectionStringOrName, DbCompiledModel model) : base(connectionStringOrName, model) {}
+
+
         #region Overrides
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder) {

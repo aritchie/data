@@ -1,4 +1,5 @@
 ﻿using System;
+using Acr.Data.Ef.Modules;
 using Acr.Data.Ef.Tests.Models;
 using NUnit.Framework;
 
@@ -8,8 +9,8 @@ namespace Acr.Data.Ef.Tests {
     [TestFixture]
     public class EntityTimestampTests : AbstractModuleTestFixture {
 
-        protected override void SetupModules(TestEfDependencyResolver resolver) {
-            resolver.Modules.Add(new EntityTimestampModule());
+        protected override void SetupModules() {
+            TestDbContext.Modules.Add(new EntityTimestampModule());
         }
 
 

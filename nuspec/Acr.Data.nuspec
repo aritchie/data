@@ -17,6 +17,6 @@ Initial Release
         </releaseNotes>
     </metadata>
     <files>
-        <file src="Acr.Data\bin\Release\Acr.Data.dll" target="lib\portable-win+net45+wp8+win8+wpa81\Acr.Data.dll" />
+        <file src="..\Acr.Data\bin\Release\Acr.Data.dll" target="lib\portable-win+net45+wp8+win8+wpa81\Acr.Data.dll" />
     </files>
 </package>

@@ -3,23 +3,19 @@ using NUnit.Framework;
 
 
 namespace Acr.Data.Ef.Tests {
-    
+
     public abstract class AbstractModuleTestFixture {
 
-        protected virtual void SetupModules(TestEfDependencyResolver resolver) {}
+        protected virtual void SetupModules() {}
 
 
         [TestFixtureSetUp]
-        public virtual void OnFixtureSetup() {
-            var resolver = (TestEfDependencyResolver)EfConfiguration.GetDependencyResolver<TestDbContext>();
-            this.SetupModules(resolver);
-        }
+        public virtual void OnFixtureSetup() {}
 
 
         [TestFixtureTearDown]
         public virtual void OnFixtureTearDown() {
-            var resolver = (TestEfDependencyResolver)EfConfiguration.GetDependencyResolver<TestDbContext>();
-            resolver.Modules.Clear();
+            TestDbContext.Modules.Clear();
         }
     }
 }

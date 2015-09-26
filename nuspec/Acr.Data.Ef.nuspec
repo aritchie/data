@@ -21,6 +21,6 @@ Initial Release
         </dependencies>
     </metadata>
     <files>
-        <file src="Acr.Data.Ef\bin\Release\Acr.Data.Ef.dll" target="lib\net45\Acr.Data.Ef.dll" />
+        <file src="..\Acr.Data.Ef\bin\Release\Acr.Data.Ef.dll" target="lib\net45\Acr.Data.Ef.dll" />
     </files>
 </package>

@@ -2,20 +2,21 @@
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using Acr.Data.Ef.Auditing;
 using Acr.Data.Ef.Tests.Models;
-using Acr.Ef.Auditing;
 using NUnit.Framework;
 
 
 namespace Acr.Data.Ef.Tests {
-    
+
     [TestFixture]
     public class EntityAuditTests : AbstractModuleTestFixture {
         private int familyId;
 
 
-        protected override void SetupModules(TestEfDependencyResolver resolver) {
-            resolver.Modules.Add(new EntityAuditModule());
+        protected override void SetupModules() {
+            TestDbContext.Modules.Add(new EntityAuditModule());
+
             using (var context = new TestDbContext()) {
                 var family = context.Families.Add(new Family {
                     Name = "Test",
@@ -35,7 +36,7 @@ namespace Acr.Data.Ef.Tests {
                 var audit = context
                     .Set<EntityAudit>()
                     .FirstOrDefault(x =>
-                        x.EntityID == fid &&
+                        x.EntityId == fid &&
                         x.Action == EntityAuditAction.Insert &&
                         x.EntityType.Contains("Family")
                     );
@@ -57,16 +58,16 @@ namespace Acr.Data.Ef.Tests {
                 var audit = context
                     .Set<EntityAudit>()
                     .FirstOrDefault(x =>
-                        x.EntityID == fid && 
+                        x.EntityId == fid &&
                         x.EntityType.Contains("Family") &&
                         x.Action == EntityAuditAction.Update
                     );
 
                 Assert.NotNull(audit, "No update audit");
 
-                var exists = audit.Properties.Any(x => 
-                    x.PropertyName == "Name" && 
-                    x.OldValue == "Test" && 
+                var exists = audit.Properties.Any(x =>
+                    x.PropertyName == "Name" &&
+                    x.OldValue == "Test" &&
                     x.NewValue == "Test2"
                 );
                 Assert.True(exists, "Audit property for Name not found");
@@ -104,7 +105,7 @@ namespace Acr.Data.Ef.Tests {
                 var p = context.People.Find(personId);
                 p.Family = new Family {
                     Name = "New Family",
-                    Date = DateTime.UtcNow  
+                    Date = DateTime.UtcNow
                 };
                 context.SaveChanges();
             }
@@ -112,15 +113,15 @@ namespace Acr.Data.Ef.Tests {
                 var pid = personId.ToString();
                 var audit = context
                     .Set<EntityAudit>()
-                    .FirstOrDefault(x => 
-                        x.EntityID == pid &&
+                    .FirstOrDefault(x =>
+                        x.EntityId == pid &&
                         x.Action == EntityAuditAction.Update &&
                         x.EntityType.Contains("Person")
                     );
 
                 Assert.NotNull(audit, "Audit not found");
                 var exists = audit.Properties.Any(
-                    x => x.PropertyName == "Family" || 
+                    x => x.PropertyName == "Family" ||
                     x.PropertyName == "FamilyId"
                 );
                 Assert.True(exists, "Family audit property not found");
@@ -138,7 +139,7 @@ namespace Acr.Data.Ef.Tests {
                         new Person { FirstName = "OneTo", LastName = "Many" }
                     }
                 });
-                context.SaveChanges(); 
+                context.SaveChanges();
             }
             // TODO: verify two separate insert audits
         }
@@ -147,28 +148,28 @@ namespace Acr.Data.Ef.Tests {
         [Test]
         [Ignore("Not done")]
         public void OneToManyRemove() {
-            
+
         }
 
 
         [Test]
         [Ignore("Not done")]
         public void Nulls() {
-            
+
         }
 
 
         [Test]
         [Ignore("Not done")]
         public void ManyToManyAdd() {
-            
+
         }
 
 
         [Test]
         [Ignore("Not done")]
         public void ManyToManyRemove() {
-            
+
         }
 
 
@@ -196,7 +197,7 @@ namespace Acr.Data.Ef.Tests {
                 var audit = context
                     .Set<EntityAudit>()
                     .FirstOrDefault(x =>
-                        x.EntityID == strFamilyId &&
+                        x.EntityId == strFamilyId &&
                         x.Action == EntityAuditAction.Delete
                     );
                 Assert.NotNull(audit, "Delete audit was not found");
