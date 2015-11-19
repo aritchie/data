@@ -27,5 +27,9 @@ namespace Acr.Data {
         Task<T> SingleOrDefaultAsync<T>(IQueryable<T> query);
         Task<T> FirstOrDefaultAsync<T>(IQueryable<T> query);
         Task<IEnumerable<T>> ToListAsync<T>(IQueryable<T> query);
+
+
+        // TODO: submit raw string/sql queries
+        // TODO: build in system.data.dynamic
     }
 }
