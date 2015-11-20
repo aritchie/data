@@ -9,12 +9,13 @@ namespace Acr.Data {
 
     public interface IDataContext {
         T Add<T>(T obj) where T : class;
+        T Get<T>(object id) where T : class;
+        void Remove<T>(T entity) where T : class;
 
         void SaveChanges();
         Task SaveChangesAsync();
         IQueryable<T> Query<T>() where T : class;
 
-        T Get<T>(object id) where T : class;
         Task<T> GetAsync<T>(object id) where T : class;
         Task<bool> AnyAsync<T>(Expression<Func<T, bool>> expression) where T : class;
         Task<int> CountAsync<T>(Expression<Func<T, bool>> expression) where T : class;
@@ -27,9 +28,5 @@ namespace Acr.Data {
         Task<T> SingleOrDefaultAsync<T>(IQueryable<T> query);
         Task<T> FirstOrDefaultAsync<T>(IQueryable<T> query);
         Task<IEnumerable<T>> ToListAsync<T>(IQueryable<T> query);
-
-
-        // TODO: submit raw string/sql queries
-        // TODO: build in system.data.dynamic
     }
 }

@@ -41,6 +41,10 @@ namespace Acr.Data.Ef {
             return this.data.Set<T>().Find(id);
         }
 
+        public void Remove<T>(T entity) where T : class {
+            this.data.Set<T>().Remove(entity);
+        }
+
 
         public Task<T> GetAsync<T>(object id) where T : class {
             return this.data.Set<T>().FindAsync(id);
@@ -80,7 +84,7 @@ namespace Acr.Data.Ef {
         public Task<T> FirstOrDefaultAsync<T>(Expression<Func<T, bool>> expression) where T : class {
             return this.data
                 .Set<T>()
-                .FirstOrDefaultAsync<T>(expression);
+                .FirstOrDefaultAsync(expression);
         }
 
 
