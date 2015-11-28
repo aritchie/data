@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Acr.Data.Ef</id>
-        <version>1.0.0</version>
+        <version>1.0.2</version>
         <title>ACR Data Entity Framework</title>
         <description>Entity Framework Extensions - Event Modules, Auditing</description>
         <authors>Allan Ritchie</authors>
@@ -16,7 +16,7 @@
 Initial Release
         </releaseNotes>
         <dependencies>
-            <dependency id="Acr.Data" version="[1.0, 2.0)" />
+            <dependency id="Acr.Data" version="[1.0.1, 2.0)" />
             <dependency id="EntityFramework" version="[6.1.3, 7.0)" />
         </dependencies>
     </metadata>
