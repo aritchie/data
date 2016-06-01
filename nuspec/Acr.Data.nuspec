@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Acr.Data</id>
-        <version>1.0.1</version>
+        <version>1.1.0</version>
         <title>ACR Data</title>
         <description>ACR Data Extensions</description>
         <authors>Allan Ritchie</authors>
@@ -12,6 +12,9 @@
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <tags>acr data</tags>
         <releaseNotes>
+1.1
+Cancellation tokens
+
 1.0
 Initial Release
         </releaseNotes>
